@@ -27,5 +27,42 @@ public final class Constants {
     public static final int SRX_CONVEYOR = 34;
     public static final int SRX_WINCH_MASTER = 7;
     public static final int SPX_WINCH_SLAVE = 9;
+    
+    public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
 
+    public static final class XRailConstants {
+        public static final int[] kEncoderPorts = new int[] {4, 5};
+        public static final boolean kEncoderReversed = false;
+        public static final int kEncoderCPR = 1024;
+        public static final double kEncoderDistancePerPulse =
+            // Distance units will be rotations
+            1.0 / (double) kEncoderCPR;
+    
+        public static final int kShooterMotorPort = 4;
+        public static final int kFeederMotorPort = 5;
+    
+        public static final double kShooterFreeRPS = 5300;
+        public static final double kShooterTargetRPS = -4000;
+        public static final double kShooterToleranceRPS = 50;
+    
+        // These are not real PID gains, and will have to be tuned for your specific robot.
+        public static final double kP = 1.87;
+        public static final double kI = 0;
+        public static final double kD = 0.36;
+    
+        // On a real robot the feedforward constants should be empirically determined; these are
+        // reasonable guesses.
+        public static final double kSVolts = 0.05;
+        public static final double kVVoltSecondsPerRotation =
+            // Should have value 12V at free speed...
+            12.0 / kShooterFreeRPS;
+    
+        public static final double kFeederSpeed = 0.5;
+      }
+
+
+
+      
 }
+
+
