@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Constants.DriveConstants;
 
 public class Drive extends SubsystemBase {
   private WPI_TalonSRX rightMaster;
@@ -21,10 +22,10 @@ public class Drive extends SubsystemBase {
 
   /** Creates a new Drive. */
   public Drive() {
-    rightMaster = new WPI_TalonSRX(Constants.RIGHT_MASTER);
-    leftMaster = new WPI_TalonSRX(Constants.LEFT_MASTER);
-    leftSlave = new WPI_VictorSPX(Constants.LEFT_SLAVE);
-    rightSlave = new WPI_TalonSRX(Constants.RIGHT_SLAVE);
+    rightMaster = new WPI_TalonSRX(DriveConstants.kRightMaster);
+    leftMaster = new WPI_TalonSRX(DriveConstants.kLeftMaster);
+    leftSlave = new WPI_VictorSPX(DriveConstants.kLeftSlave);
+    rightSlave = new WPI_TalonSRX(DriveConstants.kRightSlave);
     
     drive = new DifferentialDrive(leftMaster, rightMaster);
 

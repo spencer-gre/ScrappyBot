@@ -23,7 +23,6 @@ import frc.robot.commands.ShootBall;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Grabber;
-import frc.robot.subsystems.PIDXRail;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Winch;
 import frc.robot.subsystems.XRail;
@@ -42,7 +41,6 @@ public class RobotContainer {
   private final Grabber m_grabber = new Grabber();
   private final XRail m_xrail = new XRail();
   private final Winch m_winch = new Winch();
-  private final PIDXRail m_pidXrail = new PIDXRail();
 
 
   private final Joystick m_joystick = new Joystick(0);
@@ -78,7 +76,6 @@ public class RobotContainer {
     trigger.whileHeld(new ShootBall(m_shooter));
     thumb.whileHeld(new OverrideConveyor(m_conveyor));
     three.whileHeld(new Grab(m_grabber)); 
-    //eleven.whenPressed(new PIDCommand(new PIDController(XRailConstants.kP, XRailConstants.kI, XRailConstants.kD), m_pidXrail::getMeasurement, XRailConstants.kShooterTargetRPS, output -> m_pidXrail.useOutput(output, XRailConstants.kShooterTargetRPS), m_pidXrail));
     eleven.whileHeld(new ManualXRail(m_xrail, true));
     twelve.whenPressed(new RunXRail(m_xrail, -8000));
     sixteen.whileHeld(new ManualXRail(m_xrail, false));
