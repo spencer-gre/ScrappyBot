@@ -15,11 +15,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.XRailConstants;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.Grab;
+import frc.robot.commands.LiftXRailArm;
+import frc.robot.commands.LowerXRailArm;
 import frc.robot.commands.ManualXRail;
 import frc.robot.commands.OverrideConveyor;
 import frc.robot.commands.RunWinch;
 import frc.robot.commands.RunXRail;
 import frc.robot.commands.ShootBall;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Grabber;
@@ -41,6 +44,7 @@ public class RobotContainer {
   private final Grabber m_grabber = new Grabber();
   private final XRail m_xrail = new XRail();
   private final Winch m_winch = new Winch();
+  private final Arm m_arm = new Arm();
 
 
   private final Joystick m_joystick = new Joystick(0);
@@ -70,8 +74,8 @@ public class RobotContainer {
     final JoystickButton eleven = new JoystickButton(m_joystick, 11);
     final JoystickButton sixteen = new JoystickButton(m_joystick, 16);
     final JoystickButton twelve = new JoystickButton(m_joystick, 12);
-
-
+    final JoystickButton ten = new JoystickButton(m_joystick, 10);
+    final JoystickButton five = new JoystickButton(m_joystick, 5);
 
     trigger.whileHeld(new ShootBall(m_shooter));
     thumb.whileHeld(new OverrideConveyor(m_conveyor));
@@ -80,7 +84,8 @@ public class RobotContainer {
     twelve.whenPressed(new RunXRail(m_xrail, -8000));
     sixteen.whileHeld(new ManualXRail(m_xrail, false));
     eight.whileHeld(new RunWinch(m_winch));
-
+    ten.whenPressed(new LowerXRailArm(m_arm));
+    five.whenPressed(new LiftXRailArm(m_arm));
   }
 
   /**
