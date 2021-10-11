@@ -9,20 +9,18 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj2.command.PIDCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants.XRailConstants;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.Grab;
 import frc.robot.commands.LiftXRailArm;
 import frc.robot.commands.LowerXRailArm;
 import frc.robot.commands.ManualXRail;
 import frc.robot.commands.OverrideConveyor;
+import frc.robot.commands.RaiseColorWheelArm;
 import frc.robot.commands.RunWinch;
-import frc.robot.commands.RunXRail;
 import frc.robot.commands.ShootBall;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.ColorWheelArm;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Grabber;
@@ -45,6 +43,7 @@ public class RobotContainer {
   private final XRail m_xrail = new XRail();
   private final Winch m_winch = new Winch();
   private final Arm m_arm = new Arm();
+  private final ColorWheelArm m_colorWheelArm = new ColorWheelArm();
 
 
   private final Joystick m_joystick = new Joystick(0);
@@ -54,7 +53,9 @@ public class RobotContainer {
   public RobotContainer() {
     final DoubleSupplier leftSupply = () -> m_joystick.getRawAxis(1);
     final DoubleSupplier rightSupply = () -> m_joystick.getRawAxis(0);
-    m_drive.setDefaultCommand(new ArcadeDrive(m_drive, leftSupply, rightSupply));
+    final DoubleSupplier slider = () -> m_joystick.getThrottle();
+
+    m_drive.setDefaultCommand(new ArcadeDrive(m_drive, leftSupply, rightSupply, slider));
     
     // Configure the button bindings
     configureButtonBindings();
@@ -72,17 +73,13 @@ public class RobotContainer {
     final JoystickButton three = new JoystickButton(m_joystick, 3);
     final JoystickButton eight = new JoystickButton(m_joystick, 8);
     final JoystickButton eleven = new JoystickButton(m_joystick, 11);
-    final JoystickButton sixteen = new JoystickButton(m_joystick, 16);
-    final JoystickButton twelve = new JoystickButton(m_joystick, 12);
     final JoystickButton ten = new JoystickButton(m_joystick, 10);
     final JoystickButton five = new JoystickButton(m_joystick, 5);
 
     trigger.whileHeld(new ShootBall(m_shooter));
     thumb.whileHeld(new OverrideConveyor(m_conveyor));
     three.whileHeld(new Grab(m_grabber)); 
-    eleven.whileHeld(new ManualXRail(m_xrail, true));
-    twelve.whenPressed(new RunXRail(m_xrail, -8000));
-    sixteen.whileHeld(new ManualXRail(m_xrail, false));
+    eleven.whenPressed(new RaiseColorWheelArm(m_colorWheelArm));
     eight.whileHeld(new RunWinch(m_winch));
     ten.whenPressed(new LowerXRailArm(m_arm));
     five.whenPressed(new LiftXRailArm(m_arm));

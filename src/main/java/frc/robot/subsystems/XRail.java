@@ -21,25 +21,25 @@ public class XRail extends SubsystemBase {
   /** Creates a new XRail. */
   public XRail() {
     tal = new WPI_TalonSRX(8);
-    tal.configFactoryDefault();
-    tal.configForwardLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled);
-    tal.configReverseLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled);
-    tal.setNeutralMode(NeutralMode.Brake);
-    tal.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
-    tal.setSensorPhase(false);
-    tal.setInverted(false);
-    tal.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, 30);
-    tal.setStatusFramePeriod(StatusFrameEnhanced.Status_10_Targets, 30);
-    tal.configNominalOutputForward(0, 30);
-    tal.configNominalOutputReverse(0, 30);
-    tal.configPeakOutputForward(0.25);
-    tal.configPeakOutputReverse(0.25);
+    // tal.configFactoryDefault();
+    // tal.configForwardLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled);
+    // tal.configReverseLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled);
+    // tal.setNeutralMode(NeutralMode.Brake);
+    // tal.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
+    // tal.setSensorPhase(false);
+    // tal.setInverted(false);
+    // tal.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, 30);
+    // tal.setStatusFramePeriod(StatusFrameEnhanced.Status_10_Targets, 30);
+    // tal.configNominalOutputForward(0, 30);
+    // tal.configNominalOutputReverse(0, 30);
+    // tal.configPeakOutputForward(0.25);
+    // tal.configPeakOutputReverse(0.25);
     
-    tal.selectProfileSlot(0, 1);
-    tal.config_kF(0, Constants.kGains.kF, 30);
-    tal.config_kP(0, Constants.kGains.kP, 30);
-    tal.config_kI(0, Constants.kGains.kI, 30);
-    tal.config_kD(0, Constants.kGains.kD, 30);
+    // tal.selectProfileSlot(0, 1);
+    // tal.config_kF(0, Constants.kGains.kF, 30);
+    // tal.config_kP(0, Constants.kGains.kP, 30);
+    // tal.config_kI(0, Constants.kGains.kI, 30);
+    // tal.config_kD(0, Constants.kGains.kD, 30);
 
 
     tal.configMotionCruiseVelocity(15000, 30);
@@ -48,13 +48,12 @@ public class XRail extends SubsystemBase {
     tal.setSelectedSensorPosition(0, 0, 30);
   }
 
-  public void operate(boolean direction) {
-    if(direction == true) {
-      tal.set(0.75);
-    }
-    if(direction == false) {
-      tal.set(-0.75);
-    }
+  public void down() {
+    tal.set(-1);
+  }
+
+  public void up() {
+    tal.set(1);
   }
 
   public void pos(double pos) {

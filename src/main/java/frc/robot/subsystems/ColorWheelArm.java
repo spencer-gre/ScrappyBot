@@ -5,29 +5,34 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ColorWheelArm extends SubsystemBase {
   /** Creates a new ColorWheelArm. */
-  private Servo servo;
+  private Servo serv;
   public ColorWheelArm() {
-    servo = new Servo(1);
+    serv = new Servo(1);
   }
 
   public void liftServo() {
-    servo.set(1);
+    serv.set(0.3);
   }
 
   public void lowerServo() {
-    servo.set(0);
+    serv.set(0);
   }
 
   public void stopServo() {
-    servo.stopMotor();
+    serv.stopMotor();
+  }
+
+  public double get() {
+    return serv.get();
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Servo", serv.getAngle());
   }
 }

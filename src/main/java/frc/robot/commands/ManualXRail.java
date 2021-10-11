@@ -9,12 +9,10 @@ import frc.robot.subsystems.XRail;
 
 public class ManualXRail extends CommandBase {
   private final XRail m_xrail;
-  private final boolean m_direction;
   /** Creates a new RunXRail. */
-  public ManualXRail(XRail xrail, boolean direction) {
+  public ManualXRail(XRail xrail) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_xrail = xrail;
-    m_direction = direction;
     addRequirements(xrail);
   }
 
@@ -26,7 +24,7 @@ public class ManualXRail extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_xrail.operate(m_direction);
+    m_xrail.down();
   }
 
   // Called once the command ends or is interrupted.

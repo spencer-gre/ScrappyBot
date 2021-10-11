@@ -13,14 +13,15 @@ import frc.robot.subsystems.Drive;
 public class ArcadeDrive extends CommandBase {
   private Drive m_Drive;
   private RobotContainer m_robotontainer;
-  private DoubleSupplier m_leftOutput, m_rightOutput;
+  private DoubleSupplier m_leftOutput, m_rightOutput, m_slider;
 
   /** Creates a new ArcadeDrive. */
-  public ArcadeDrive(Drive drive, DoubleSupplier leftValue, DoubleSupplier rightValue) {
+  public ArcadeDrive(Drive drive, DoubleSupplier leftValue, DoubleSupplier rightValue, DoubleSupplier slider) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_leftOutput = leftValue;
     m_rightOutput = rightValue;
     m_Drive = drive;
+    m_slider = slider;
 
     addRequirements(drive);
   }
@@ -32,7 +33,12 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Drive.telopDrive(m_leftOutput.getAsDouble(), m_rightOutput.getAsDouble());
+    if(m_slider.getAsDouble() > 0.5) {
+      m_Drive.telopDrive(m_leftOutput.getAsDouble(), m_rightOutput.getAsDouble());
+    }
+    else {
+      m_Drive.telopDrive(-m_leftOutput.getAsDouble(), m_rightOutput.getAsDouble());
+    }
   }
 
   // Called once the command ends or is interrupted.
