@@ -4,23 +4,25 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ColorWheelArm extends SubsystemBase {
   /** Creates a new ColorWheelArm. */
-  private Servo serv;
+  private PWM serv;
   public ColorWheelArm() {
-    serv = new Servo(1);
+    serv = new PWM(1);
+    serv.setBounds(2.0, 1.52, 1.5, 1.48, 1);
   }
 
   public void liftServo() {
-    serv.set(0.3);
+    serv.setPosition(0.3);
   }
 
   public void lowerServo() {
-    serv.set(0);
+    serv.setPosition(0);
   }
 
   public void stopServo() {
@@ -28,11 +30,11 @@ public class ColorWheelArm extends SubsystemBase {
   }
 
   public double get() {
-    return serv.get();
+    return serv.getPosition();
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Servo", serv.getAngle());
+    SmartDashboard.putNumber("Servo", serv.getPosition());
   }
 }
