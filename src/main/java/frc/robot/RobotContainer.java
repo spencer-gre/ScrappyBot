@@ -14,6 +14,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ExtendGrabber;
 import frc.robot.commands.Grab;
 import frc.robot.commands.LiftXRailArm;
+import frc.robot.commands.LowerColorWheelArm;
 import frc.robot.commands.LowerXRailArm;
 import frc.robot.commands.ManualXRail;
 import frc.robot.commands.OverrideConveyor;
@@ -21,7 +22,9 @@ import frc.robot.commands.RaiseColorWheelArm;
 import frc.robot.commands.RetractGrabber;
 import frc.robot.commands.RunWinch;
 import frc.robot.commands.ShootBall;
+import frc.robot.commands.SpinThreeTimes;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.ColorWheelArm;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drive;
@@ -46,6 +49,7 @@ public class RobotContainer {
   private final Winch m_winch = new Winch();
   private final Arm m_arm = new Arm();
   private final ColorWheelArm m_colorWheelArm = new ColorWheelArm();
+  private final ColorWheel m_colorwheel = new ColorWheel();
 
 
   private final Joystick m_joystick = new Joystick(0);
@@ -78,6 +82,9 @@ public class RobotContainer {
     final JoystickButton five = new JoystickButton(m_joystick, 5);
     final JoystickButton four = new JoystickButton(m_joystick, 4);
     final JoystickButton three = new JoystickButton(m_joystick, 3);
+    final JoystickButton six = new JoystickButton(m_joystick, 6);
+    final JoystickButton nine = new JoystickButton(m_joystick, 9);
+    final JoystickButton seven = new JoystickButton(m_joystick, 7);
 
     trigger.whileHeld(new ShootBall(m_shooter));
     eleven.whenPressed(new RaiseColorWheelArm(m_colorWheelArm));
@@ -87,6 +94,9 @@ public class RobotContainer {
     four.whenPressed(new ExtendGrabber(m_grabber));
     three.whenPressed(new RetractGrabber(m_grabber)); 
     thumb.whileHeld(new Grab(m_grabber));
+    six.whenPressed(new RaiseColorWheelArm(m_colorWheelArm));
+    nine.whenPressed(new LowerColorWheelArm(m_colorWheelArm));
+    seven.whenPressed(new SpinThreeTimes(m_colorwheel));
   }
 
   /**

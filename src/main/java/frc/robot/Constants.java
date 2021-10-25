@@ -27,6 +27,8 @@ public final class Constants {
     public static final int SRX_CONVEYOR = 34;
     public static final int SRX_WINCH_MASTER = 7;
     public static final int SPX_WINCH_SLAVE = 9;
+
+    public static final Gains kWheelGains = new Gains(1.0, 0.0, 0.0, 0.0, 0, 1.0);
     
     public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
 

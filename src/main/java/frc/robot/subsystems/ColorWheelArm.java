@@ -13,16 +13,15 @@ public class ColorWheelArm extends SubsystemBase {
   /** Creates a new ColorWheelArm. */
   private PWM serv;
   public ColorWheelArm() {
-    serv = new PWM(1);
-    serv.setBounds(2.0, 1.52, 1.5, 1.48, 1);
+    serv = new Servo(1);
   }
 
   public void liftServo() {
-    serv.setPosition(0.3);
+    serv.setPosition(0.38);
   }
 
   public void lowerServo() {
-    serv.setPosition(0);
+    serv.setPosition(1);
   }
 
   public void stopServo() {

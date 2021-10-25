@@ -5,7 +5,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -17,7 +16,6 @@ import frc.robot.Constants;
 public class Conveyor extends SubsystemBase {
   private WPI_TalonSRX tal;
   private AnalogInput ultrasound;
-  private int count;
   private Counter counter;
   /** Creates a new Conveyor. */
   public Conveyor() {
@@ -26,6 +24,11 @@ public class Conveyor extends SubsystemBase {
     ultrasound = new AnalogInput(1);
     counter = new Counter(0);
     counter.clearDownSource();
+
+    tal.configFactoryDefault();
+    tal.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
+    tal.setSensorPhase(true);
+    tal.setInverted(false);
   }
 
   public void overrideConveyor() {
@@ -34,6 +37,10 @@ public class Conveyor extends SubsystemBase {
 
   public int getCount() {
     return counter.get();
+  }
+
+  public double getEncoder() {
+    return tal.getSelectedSensorPosition();
   }
 
   public int getUltrasound() {
@@ -50,6 +57,7 @@ public class Conveyor extends SubsystemBase {
     // if(getPhotosensor()){
     //   incCount();
     // }
+    SmartDashboard.putNumber("ConveyorEncoder", getEncoder());
     SmartDashboard.putNumber("Count", getCount());
     SmartDashboard.putNumber("Ultrasound", getUltrasound());
   }
