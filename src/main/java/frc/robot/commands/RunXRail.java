@@ -9,24 +9,23 @@ import frc.robot.subsystems.XRail;
 
 public class RunXRail extends CommandBase {
   private final XRail m_xrail;
-  private final double m_pos;
   /** Creates a new RunXRail. */
-  public RunXRail(XRail xrail, double pos) {
+  public RunXRail(XRail xrail) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_xrail = xrail;
-    m_pos = pos;
     addRequirements(xrail);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_xrail.zero();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_xrail.pos(m_pos);
+    m_xrail.max();
   }
 
   // Called once the command ends or is interrupted.

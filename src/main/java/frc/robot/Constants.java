@@ -30,7 +30,7 @@ public final class Constants {
 
     public static final Gains kWheelGains = new Gains(1.0, 0.0, 0.0, 0.0, 0, 1.0);
     
-    public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
+    public static final Gains kGains = new Gains(3.651, 0.0, 16.177, 0.2, 0, 1.0);
 
     public static final class XRailConstants {
         public static final int kSRXXRail = 8;

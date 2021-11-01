@@ -46,27 +46,7 @@ public class ColorWheel extends SubsystemBase {
     tal.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
     tal.setSensorPhase(true);
     tal.setInverted(false);
-    tal.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, 30);
-    tal.setStatusFramePeriod(StatusFrameEnhanced.Status_10_Targets, 30);
-    tal.configNominalOutputForward(0);
-    tal.configNominalOutputReverse(0);
-    tal.configPeakOutputForward(0.65);
-    tal.configPeakOutputReverse(0.65);
-
-    tal.selectProfileSlot(0, 1);
-    tal.config_kF(0, Constants.kWheelGains.kF, 30);
-    tal.config_kP(0, Constants.kWheelGains.kP, 30);
-    tal.config_kI(0, Constants.kWheelGains.kI, 30);
-    tal.config_kD(0, Constants.kWheelGains.kD, 30);
-
-
-    tal.configMotionCruiseVelocity(6000, 30);
-    tal.configMotionAcceleration(6000, 30);
-
-    tal.setSelectedSensorPosition(0, 0, 30);
-
-    tal.setNeutralMode(NeutralMode.Brake); 
-  }
+  } 
 
   public void startMotor() {
     tal.set(ControlMode.PercentOutput, 0.5);
@@ -117,8 +97,8 @@ public class ColorWheel extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("ColorWheel Pos", getWheelPos());
     SmartDashboard.putString("DetectedColor", Character.toString(getColor()));
     SmartDashboard.putString("ReqColor", Character.toString(getRequired()));
-    SmartDashboard.putNumber("ColorWheel Pos", getWheelPos());
   }
 }

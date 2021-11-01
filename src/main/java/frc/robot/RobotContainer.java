@@ -16,11 +16,10 @@ import frc.robot.commands.Grab;
 import frc.robot.commands.LiftXRailArm;
 import frc.robot.commands.LowerColorWheelArm;
 import frc.robot.commands.LowerXRailArm;
-import frc.robot.commands.ManualXRail;
-import frc.robot.commands.OverrideConveyor;
 import frc.robot.commands.RaiseColorWheelArm;
 import frc.robot.commands.RetractGrabber;
 import frc.robot.commands.RunWinch;
+import frc.robot.commands.RunXRail;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.SpinThreeTimes;
 import frc.robot.subsystems.Arm;
@@ -42,6 +41,7 @@ import frc.robot.subsystems.XRail;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drive m_drive = new Drive();
+  private final ColorWheel m_colorwheel = new ColorWheel();
   private final Shooter m_shooter = new Shooter();
   private final Conveyor m_conveyor = new Conveyor();
   private final Grabber m_grabber = new Grabber();
@@ -49,7 +49,6 @@ public class RobotContainer {
   private final Winch m_winch = new Winch();
   private final Arm m_arm = new Arm();
   private final ColorWheelArm m_colorWheelArm = new ColorWheelArm();
-  private final ColorWheel m_colorwheel = new ColorWheel();
 
 
   private final Joystick m_joystick = new Joystick(0);
@@ -85,6 +84,7 @@ public class RobotContainer {
     final JoystickButton six = new JoystickButton(m_joystick, 6);
     final JoystickButton nine = new JoystickButton(m_joystick, 9);
     final JoystickButton seven = new JoystickButton(m_joystick, 7);
+    final JoystickButton sixteen = new JoystickButton(m_joystick, 16);
 
     trigger.whileHeld(new ShootBall(m_shooter));
     eleven.whenPressed(new RaiseColorWheelArm(m_colorWheelArm));
@@ -97,6 +97,7 @@ public class RobotContainer {
     six.whenPressed(new RaiseColorWheelArm(m_colorWheelArm));
     nine.whenPressed(new LowerColorWheelArm(m_colorWheelArm));
     seven.whenPressed(new SpinThreeTimes(m_colorwheel));
+    sixteen.whenPressed(new RunXRail(m_xrail));
   }
 
   /**

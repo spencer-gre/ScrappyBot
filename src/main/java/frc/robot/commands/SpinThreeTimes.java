@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ColorWheel;
 
@@ -26,6 +27,7 @@ public class SpinThreeTimes extends CommandBase {
   @Override
   public void execute() {
     m_ColorWheel.spinThreeTimes();
+    SmartDashboard.putNumber("COLORWHEELPOS", m_ColorWheel.getWheelPos());
   }
 
   // Called once the command ends or is interrupted.

@@ -21,43 +21,70 @@ public class XRail extends SubsystemBase {
   /** Creates a new XRail. */
   public XRail() {
     tal = new WPI_TalonSRX(8);
-    // tal.configFactoryDefault();
-    // tal.configForwardLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled);
-    // tal.configReverseLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled);
-    // tal.setNeutralMode(NeutralMode.Brake);
-    // tal.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
-    // tal.setSensorPhase(false);
-    // tal.setInverted(false);
-    // tal.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, 30);
-    // tal.setStatusFramePeriod(StatusFrameEnhanced.Status_10_Targets, 30);
-    // tal.configNominalOutputForward(0, 30);
-    // tal.configNominalOutputReverse(0, 30);
-    // tal.configPeakOutputForward(0.25);
-    // tal.configPeakOutputReverse(0.25);
-    
-    // tal.selectProfileSlot(0, 1);
-    // tal.config_kF(0, Constants.kGains.kF, 30);
-    // tal.config_kP(0, Constants.kGains.kP, 30);
-    // tal.config_kI(0, Constants.kGains.kI, 30);
-    // tal.config_kD(0, Constants.kGains.kD, 30);
+    /* Factory default hardware to prevent unexpected behavior */
+		tal.configFactoryDefault();
 
+		/* Configure Sensor Source for Pirmary PID */
+		tal.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
 
-    tal.configMotionCruiseVelocity(15000, 30);
-    tal.configMotionAcceleration(6000, 30);
+		/* set deadband to super small 0.001 (0.1 %).
+			The default deadband is 0.04 (4 %) */
+		tal.configNeutralDeadband(0.001, 30);
 
-    tal.setSelectedSensorPosition(0, 0, 30);
+		/**
+		 * Configure Talon SRX Output and Sesnor direction accordingly Invert Motor to
+		 * have green LEDs when sdriving Talon Forward / Requesting Postiive Output Phase
+		 * sensor to have positive increment when driving Talon Forward (Green LED)
+		 */
+		tal.setSensorPhase(true);
+		tal.setInverted(true);
+
+		/* Set relevant frame periods to be at least as fast as periodic rate */
+		tal.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, 30);
+		tal.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, 30);
+
+		/* Set the peak and nominal outputs */
+		tal.configNominalOutputForward(0, 30);
+		tal.configNominalOutputReverse(0, 30);
+		tal.configPeakOutputForward(1, 30);
+		tal.configPeakOutputReverse(-1, 30);
+
+		/* Set Motion Magic gains in slot0 - see documentation */
+		tal.selectProfileSlot(0, 0);
+		tal.config_kF(0, Constants.kGains.kF, 30);
+		tal.config_kP(0, Constants.kGains.kP, 30);
+		tal.config_kI(0, Constants.kGains.kI, 30);
+		tal.config_kD(0, Constants.kGains.kD, 30);
+
+		/* Set acceleration and vcruise velocity - see documentation */
+		tal.configMotionCruiseVelocity(3000, 30);
+		tal.configMotionAcceleration(3000, 30);
+
+		/* Zero the sensor once on robot boot up */
+    tal.setSelectedSensorPosition(0, 0, 30);   
+    tal.configForwardLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled);
+    tal.configReverseLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled);
+
   }
 
   public void down() {
-    tal.set(-1);
+    tal.set(ControlMode.PercentOutput, -1);
   }
 
   public void up() {
-    tal.set(1);
+    tal.set(ControlMode.PercentOutput, 1);
   }
 
-  public void pos(double pos) {
-    tal.set(ControlMode.MotionMagic, pos);
+  public void max() {
+    tal.set(ControlMode.MotionMagic, -3000);
+  }
+
+  public void min() {
+    tal.set(ControlMode.MotionMagic, 0);
+  }
+
+  public void zero() {
+    tal.setSelectedSensorPosition(0, 0, 30);
   }
 
   public void stop(){
