@@ -25,7 +25,7 @@ public class XRail extends SubsystemBase {
 		tal.configFactoryDefault();
 
 		/* Configure Sensor Source for Pirmary PID */
-		tal.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
+		tal.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
 
 		/* set deadband to super small 0.001 (0.1 %).
 			The default deadband is 0.04 (4 %) */
