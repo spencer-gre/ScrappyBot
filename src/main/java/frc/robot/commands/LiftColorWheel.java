@@ -7,13 +7,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ColorWheelArm;
 
-public class LowerColorWheelArm extends CommandBase {
-  /** Creates a new LowerColorWheelArm. */
-  private ColorWheelArm m_ColorwheelArm;
-  public LowerColorWheelArm(ColorWheelArm cwa) {
+public class LiftColorWheel extends CommandBase {
+  /** Creates a new LiftColorWheel. */
+  private ColorWheelArm m_cwa;
+  public LiftColorWheel(ColorWheelArm cwa) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_ColorwheelArm = cwa;
-    addRequirements(m_ColorwheelArm);
+    m_cwa = cwa;
+    addRequirements(m_cwa);
   }
 
   // Called when the command is initially scheduled.
@@ -23,21 +23,18 @@ public class LowerColorWheelArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_ColorwheelArm.lowerServo();
+    m_cwa.liftSolenoid();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_ColorwheelArm.stopServo();
+    m_cwa.stopSolenoid();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(m_ColorwheelArm.get() >= 1) {
-      return true;
-    }
     return false;
   }
 }

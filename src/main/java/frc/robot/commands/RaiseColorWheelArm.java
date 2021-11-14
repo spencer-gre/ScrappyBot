@@ -19,14 +19,14 @@ public class RaiseColorWheelArm extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    // m_colorWheelArm.liftSolenoid();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     m_colorWheelArm.liftServo();
-    double angle = m_colorWheelArm.get();
-    SmartDashboard.putNumber("ServoAngle", angle);
   }
 
   // Called once the command ends or is interrupted.
@@ -38,12 +38,11 @@ public class RaiseColorWheelArm extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // if(m_colorWheelArm.get() >= 0.3) {
-    //   return true;
-    // }
-    // else{
-    //   return false;
-    // }
-    return false;
+    if(m_colorWheelArm.get() <= 0.38) {
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }

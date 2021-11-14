@@ -7,25 +7,25 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.XRail;
 
-public class RunXRail extends CommandBase {
+public class RaiseXRail extends CommandBase {
+  /** Creates a new RaiseXRail. */
   private final XRail m_xrail;
-  /** Creates a new RunXRail. */
-  public RunXRail(XRail xrail) {
+  public RaiseXRail(XRail xrail) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_xrail = xrail;
-    addRequirements(xrail);
+    addRequirements(m_xrail);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    m_xrail.zero();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_xrail.max();
+    if(m_xrail.getEncoder() > -11355) {
+      m_xrail.up();
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -37,6 +37,9 @@ public class RunXRail extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(m_xrail.getEncoder() < -11355) {
+      return true;
+    }
     return false;
   }
 }

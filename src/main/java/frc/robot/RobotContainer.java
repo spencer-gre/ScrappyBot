@@ -13,13 +13,15 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ExtendGrabber;
 import frc.robot.commands.Grab;
+import frc.robot.commands.LiftColorWheel;
 import frc.robot.commands.LiftXRailArm;
 import frc.robot.commands.LowerColorWheelArm;
+import frc.robot.commands.LowerXRail;
 import frc.robot.commands.LowerXRailArm;
 import frc.robot.commands.RaiseColorWheelArm;
+import frc.robot.commands.RaiseXRail;
 import frc.robot.commands.RetractGrabber;
 import frc.robot.commands.RunWinch;
-import frc.robot.commands.RunXRail;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.SpinThreeTimes;
 import frc.robot.subsystems.Arm;
@@ -85,9 +87,9 @@ public class RobotContainer {
     final JoystickButton nine = new JoystickButton(m_joystick, 9);
     final JoystickButton seven = new JoystickButton(m_joystick, 7);
     final JoystickButton sixteen = new JoystickButton(m_joystick, 16);
+    final JoystickButton fourteen = new JoystickButton(m_joystick, 14);
 
     trigger.whileHeld(new ShootBall(m_shooter));
-    eleven.whenPressed(new RaiseColorWheelArm(m_colorWheelArm));
     eight.whileHeld(new RunWinch(m_winch));
     ten.whenPressed(new LowerXRailArm(m_arm));
     five.whenPressed(new LiftXRailArm(m_arm));
@@ -97,7 +99,11 @@ public class RobotContainer {
     six.whenPressed(new RaiseColorWheelArm(m_colorWheelArm));
     nine.whenPressed(new LowerColorWheelArm(m_colorWheelArm));
     seven.whenPressed(new SpinThreeTimes(m_colorwheel));
-    sixteen.whenPressed(new RunXRail(m_xrail));
+    eleven.whileHeld(new RaiseXRail(m_xrail));
+    sixteen.whileHeld(new LowerXRail(m_xrail));
+    fourteen.whenPressed(new LiftColorWheel(m_colorWheelArm).withTimeout(3));
+
+    // sixteen.whileHeld(new ManualXRail(m_xrail));
   }
 
   /**

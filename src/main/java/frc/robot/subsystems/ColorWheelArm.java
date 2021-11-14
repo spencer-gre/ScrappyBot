@@ -4,18 +4,34 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ColorWheelArm extends SubsystemBase {
   /** Creates a new ColorWheelArm. */
   private PWM serv;
+  private DoubleSolenoid solenoid;
   public ColorWheelArm() {
     serv = new Servo(1);
+    solenoid = new DoubleSolenoid(2, 3);
   }
 
+  public void liftSolenoid(){
+    solenoid.set(Value.kReverse);
+  }
+  
+  public void lowerSolenoid() {
+    solenoid.set(Value.kForward);
+  }
+  
+  public void stopSolenoid() {
+    solenoid.set(Value.kOff);
+  }
+  
   public void liftServo() {
     serv.setPosition(0.38);
   }
