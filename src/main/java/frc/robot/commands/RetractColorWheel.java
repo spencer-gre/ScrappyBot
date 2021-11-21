@@ -4,35 +4,32 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ColorWheelArm;
 
-public class RaiseColorWheelArm extends CommandBase {
-  /** Creates a new RaiseColorWheelArm. */
-  private final ColorWheelArm m_colorWheelArm;
-  public RaiseColorWheelArm(ColorWheelArm colorWheelArm) {
+public class RetractColorWheel extends CommandBase {
+  /** Creates a new RetractColorWheel. */
+  ColorWheelArm m_cwa;
+  public RetractColorWheel(ColorWheelArm cwa) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_colorWheelArm = colorWheelArm;
-    addRequirements(m_colorWheelArm);
+    m_cwa = cwa;
+    addRequirements(m_cwa);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    // m_colorWheelArm.liftSolenoid();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_colorWheelArm.liftServo();
+    m_cwa.lowerSolenoid();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_colorWheelArm.stopServo();
+    m_cwa.stopSolenoid();
   }
 
   // Returns true when the command should end.

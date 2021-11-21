@@ -9,6 +9,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ExtendGrabber;
@@ -22,6 +23,8 @@ import frc.robot.commands.RaiseColorWheelArm;
 import frc.robot.commands.RaiseXRail;
 import frc.robot.commands.RetractGrabber;
 import frc.robot.commands.RunWinch;
+import frc.robot.commands.SequentialLower;
+import frc.robot.commands.SequentialRaise;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.SpinThreeTimes;
 import frc.robot.subsystems.Arm;
@@ -88,6 +91,7 @@ public class RobotContainer {
     final JoystickButton seven = new JoystickButton(m_joystick, 7);
     final JoystickButton sixteen = new JoystickButton(m_joystick, 16);
     final JoystickButton fourteen = new JoystickButton(m_joystick, 14);
+    final JoystickButton thirteen = new JoystickButton(m_joystick, 13);
 
     trigger.whileHeld(new ShootBall(m_shooter));
     eight.whileHeld(new RunWinch(m_winch));
@@ -96,12 +100,15 @@ public class RobotContainer {
     four.whenPressed(new ExtendGrabber(m_grabber));
     three.whenPressed(new RetractGrabber(m_grabber)); 
     thumb.whileHeld(new Grab(m_grabber));
-    six.whenPressed(new RaiseColorWheelArm(m_colorWheelArm));
-    nine.whenPressed(new LowerColorWheelArm(m_colorWheelArm));
+    six.whenPressed(new RaiseColorWheelArm(m_colorWheelArm).withTimeout(1));
+    nine.whenPressed(new LowerColorWheelArm(m_colorWheelArm).withTimeout(1));
     seven.whenPressed(new SpinThreeTimes(m_colorwheel));
     eleven.whileHeld(new RaiseXRail(m_xrail));
     sixteen.whileHeld(new LowerXRail(m_xrail));
-    fourteen.whenPressed(new LiftColorWheel(m_colorWheelArm).withTimeout(3));
+    // fourteen.whenPressed(new LiftColorWheel(m_colorWheelArm).withTimeout(3));
+    thirteen.whenPressed(new SequentialRaise(m_colorWheelArm));
+    fourteen.whenPressed(new SequentialLower(m_colorWheelArm));
+
 
     // sixteen.whileHeld(new ManualXRail(m_xrail));
   }
