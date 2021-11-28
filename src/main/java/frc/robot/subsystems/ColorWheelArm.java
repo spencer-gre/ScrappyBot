@@ -33,7 +33,7 @@ public class ColorWheelArm extends SubsystemBase {
   }
   
   public void liftServo() {
-    serv.setPosition(0.38);
+    serv.setPosition(0.35);
   }
 
   public void lowerServo() {

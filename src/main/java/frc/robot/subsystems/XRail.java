@@ -41,11 +41,15 @@ public class XRail extends SubsystemBase {
   }
 
   public void down() {
-    tal.set(ControlMode.PercentOutput, -0.75);
+    if(tal.getSensorCollection().isFwdLimitSwitchClosed()) {
+      tal.set(ControlMode.PercentOutput, -0.75);
+    }
   }
 
   public void up() {
-    tal.set(ControlMode.PercentOutput, 1);
+    if(tal.getSensorCollection().isFwdLimitSwitchClosed()) {
+      tal.set(ControlMode.PercentOutput, 1);
+    }
   }
 
   public void zero() {
