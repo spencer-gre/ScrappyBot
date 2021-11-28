@@ -10,6 +10,7 @@ import frc.robot.subsystems.ColorWheelArm;
 public class RetractColorWheel extends CommandBase {
   /** Creates a new RetractColorWheel. */
   ColorWheelArm m_cwa;
+
   public RetractColorWheel(ColorWheelArm cwa) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_cwa = cwa;

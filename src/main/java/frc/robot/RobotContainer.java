@@ -4,17 +4,13 @@
 
 package frc.robot;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ExtendGrabber;
 import frc.robot.commands.Grab;
-import frc.robot.commands.LiftColorWheel;
 import frc.robot.commands.LiftXRailArm;
 import frc.robot.commands.LowerColorWheelArm;
 import frc.robot.commands.LowerXRail;
@@ -35,6 +31,7 @@ import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Winch;
 import frc.robot.subsystems.XRail;
+import java.util.function.DoubleSupplier;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -54,9 +51,7 @@ public class RobotContainer {
   private final Arm m_arm = new Arm();
   private final ColorWheelArm m_colorWheelArm = new ColorWheelArm();
 
-
   private final Joystick m_joystick = new Joystick(0);
-
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -65,7 +60,7 @@ public class RobotContainer {
     final DoubleSupplier slider = () -> m_joystick.getThrottle();
 
     m_drive.setDefaultCommand(new ArcadeDrive(m_drive, leftSupply, rightSupply, slider));
-    
+
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -97,7 +92,7 @@ public class RobotContainer {
     ten.whenPressed(new LowerXRailArm(m_arm));
     five.whenPressed(new LiftXRailArm(m_arm));
     four.whenPressed(new ExtendGrabber(m_grabber));
-    three.whenPressed(new RetractGrabber(m_grabber)); 
+    three.whenPressed(new RetractGrabber(m_grabber));
     thumb.whileHeld(new Grab(m_grabber));
     six.whenPressed(new RaiseColorWheelArm(m_colorWheelArm).withTimeout(1));
     nine.whenPressed(new LowerColorWheelArm(m_colorWheelArm).withTimeout(1));
@@ -106,7 +101,6 @@ public class RobotContainer {
     // fourteen.whenPressed(new LiftColorWheel(m_colorWheelArm).withTimeout(3));
     thirteen.whenPressed(new SequentialRaise(m_colorWheelArm));
     fourteen.whenPressed(new SequentialLower(m_colorWheelArm));
-
 
     // sixteen.whileHeld(new ManualXRail(m_xrail));
   }

@@ -7,8 +7,8 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Relay.Value;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -99,7 +99,7 @@ public class Robot extends TimedRobot {
   }
 
   public void CompressorHandler() {
-    if(!pcm.getPressureSwitchValue()) {
+    if (!pcm.getPressureSwitchValue()) {
       compressor.set(Value.kForward);
     } else {
       compressor.set(Value.kReverse);

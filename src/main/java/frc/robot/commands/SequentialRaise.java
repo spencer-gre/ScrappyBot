@@ -16,8 +16,7 @@ public class SequentialRaise extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new LiftColorWheel(m_ColorWheelArm).withTimeout(1.5),
-      new RaiseColorWheelArm(m_ColorWheelArm).withTimeout(1)
-    );
+        new LiftColorWheel(m_ColorWheelArm).withTimeout(1.5),
+        new RaiseColorWheelArm(m_ColorWheelArm).withTimeout(1));
   }
 }

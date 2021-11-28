@@ -10,6 +10,7 @@ import frc.robot.subsystems.Grabber;
 public class ExtendGrabber extends CommandBase {
   /** Creates a new ExtendGrabber. */
   private Grabber m_grabber;
+
   public ExtendGrabber(Grabber grabber) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_grabber = grabber;

@@ -16,8 +16,7 @@ public class SequentialLower extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new LowerColorWheelArm(m_ColorWheelArm).withTimeout(1),
-      new RetractColorWheel(m_ColorWheelArm).withTimeout(1.5)
-    );
+        new LowerColorWheelArm(m_ColorWheelArm).withTimeout(1),
+        new RetractColorWheel(m_ColorWheelArm).withTimeout(1.5));
   }
 }

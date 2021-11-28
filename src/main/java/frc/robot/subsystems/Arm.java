@@ -4,12 +4,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.PWMSpeedController;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,8 +13,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Arm extends SubsystemBase {
   /** Creates a new Arm. */
   private Spark spark;
+
   private AnalogInput seatMotor;
   private final WPI_TalonSRX tal;
+
   public Arm() {
     spark = new Spark(0);
     seatMotor = new AnalogInput(0);
@@ -61,7 +59,7 @@ public class Arm extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if(getRevLimitSwitch()) {
+    if (getRevLimitSwitch()) {
       seatMotor.resetAccumulator();
     }
     getFwdLimitSwitch();

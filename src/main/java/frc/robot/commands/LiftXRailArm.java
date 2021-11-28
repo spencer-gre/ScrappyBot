@@ -10,6 +10,7 @@ import frc.robot.subsystems.Arm;
 public class LiftXRailArm extends CommandBase {
   /** Creates a new LiftXRailArm. */
   private final Arm m_arm;
+
   public LiftXRailArm(Arm arm) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_arm = arm;
@@ -18,8 +19,7 @@ public class LiftXRailArm extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -37,7 +37,7 @@ public class LiftXRailArm extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(m_arm.getFwdLimitSwitch()) {
+    if (m_arm.getFwdLimitSwitch()) {
       return true;
     }
     return false;

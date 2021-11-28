@@ -10,6 +10,7 @@ import frc.robot.subsystems.ColorWheelArm;
 public class LowerColorWheelArm extends CommandBase {
   /** Creates a new LowerColorWheelArm. */
   private ColorWheelArm m_ColorwheelArm;
+
   public LowerColorWheelArm(ColorWheelArm cwa) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_ColorwheelArm = cwa;

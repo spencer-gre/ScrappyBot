@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,7 +19,7 @@ public class Conveyor extends SubsystemBase {
   /** Creates a new Conveyor. */
   public Conveyor() {
     tal = new WPI_TalonSRX(Constants.SRX_CONVEYOR);
-    
+
     ultrasound = new AnalogInput(1);
     counter = new Counter(0);
     counter.clearDownSource();

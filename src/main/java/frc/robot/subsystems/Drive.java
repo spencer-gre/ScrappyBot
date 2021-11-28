@@ -4,13 +4,10 @@
 
 package frc.robot.subsystems;
 
-import java.lang.reflect.Field;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
@@ -19,7 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 
 public class Drive extends SubsystemBase {
@@ -30,11 +26,10 @@ public class Drive extends SubsystemBase {
   private CANCoder leftEncoder;
   private CANCoder rightEncoder;
 
-  private DifferentialDrive drive; 
+  private DifferentialDrive drive;
   private final Field2d m_field = new Field2d();
   private DifferentialDriveOdometry m_odometry;
   private AHRS navx;
-
 
   /** Creates a new Drive. */
   public Drive() {
@@ -46,7 +41,7 @@ public class Drive extends SubsystemBase {
     rightEncoder = new CANCoder(11);
     leftEncoder.setPosition(0);
     rightEncoder.setPosition(0);
-    
+
     drive = new DifferentialDrive(leftMaster, rightMaster);
     rightSlave.follow(rightMaster);
     leftSlave.follow(leftMaster);
@@ -62,11 +57,14 @@ public class Drive extends SubsystemBase {
   }
 
   public void updateOdometry() {
-    m_odometry.update(Rotation2d.fromDegrees(navx.getAngle()), nativeUnitsToDistanceMeters(leftEncoder.getPosition()), nativeUnitsToDistanceMeters(rightEncoder.getPosition()));
+    m_odometry.update(
+        Rotation2d.fromDegrees(navx.getAngle()),
+        nativeUnitsToDistanceMeters(leftEncoder.getPosition()),
+        nativeUnitsToDistanceMeters(rightEncoder.getPosition()));
   }
 
-  private double nativeUnitsToDistanceMeters(double sensorCounts){
-    double motorRotations = (double)sensorCounts / 4096;
+  private double nativeUnitsToDistanceMeters(double sensorCounts) {
+    double motorRotations = (double) sensorCounts / 4096;
     double wheelRotations = motorRotations / 10.71;
     double positionMeters = wheelRotations * (2 * Math.PI * Units.inchesToMeters(3));
     return positionMeters;
@@ -80,6 +78,5 @@ public class Drive extends SubsystemBase {
     m_field.setRobotPose(m_odometry.getPoseMeters());
     SmartDashboard.putNumber("OdometryX", m_odometry.getPoseMeters().getX());
     SmartDashboard.putNumber("OdometryY", m_odometry.getPoseMeters().getY());
-
   }
 }

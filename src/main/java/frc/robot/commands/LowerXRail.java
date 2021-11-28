@@ -10,6 +10,7 @@ import frc.robot.subsystems.XRail;
 public class LowerXRail extends CommandBase {
   /** Creates a new LowerXRail. */
   private final XRail m_xrail;
+
   public LowerXRail(XRail xrail) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_xrail = xrail;
@@ -23,7 +24,7 @@ public class LowerXRail extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_xrail.getEncoder() < -60){
+    if (m_xrail.getEncoder() < -60) {
       m_xrail.down();
     }
   }
@@ -37,7 +38,7 @@ public class LowerXRail extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(m_xrail.getEncoder() > -60) {
+    if (m_xrail.getEncoder() > -60) {
       return true;
     }
     return false;

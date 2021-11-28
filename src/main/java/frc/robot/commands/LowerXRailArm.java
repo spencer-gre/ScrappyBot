@@ -10,6 +10,7 @@ import frc.robot.subsystems.Arm;
 public class LowerXRailArm extends CommandBase {
   /** Creates a new LowerXRailArm. */
   private Arm m_arm;
+
   public LowerXRailArm(Arm arm) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_arm = arm;
@@ -25,7 +26,6 @@ public class LowerXRailArm extends CommandBase {
   public void execute() {
     m_arm.lowerArm();
     m_arm.getCount();
-
   }
 
   // Called once the command ends or is interrupted.
@@ -37,7 +37,7 @@ public class LowerXRailArm extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(m_arm.getRevLimitSwitch()){
+    if (m_arm.getRevLimitSwitch()) {
       return true;
     }
     return false;

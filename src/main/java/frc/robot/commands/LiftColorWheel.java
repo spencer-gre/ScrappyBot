@@ -10,6 +10,7 @@ import frc.robot.subsystems.ColorWheelArm;
 public class LiftColorWheel extends CommandBase {
   /** Creates a new LiftColorWheel. */
   private ColorWheelArm m_cwa;
+
   public LiftColorWheel(ColorWheelArm cwa) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_cwa = cwa;

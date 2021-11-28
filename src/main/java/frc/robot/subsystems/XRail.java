@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -29,25 +28,27 @@ public class XRail extends SubsystemBase {
     config.forwardLimitSwitchNormal = LimitSwitchNormal.Disabled;
     config.reverseLimitSwitchNormal = LimitSwitchNormal.Disabled;
     tal.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
-    
-    tal.configAllSettings(config);    // config.
+
+    tal.configAllSettings(config); // config.
     tal.setNeutralMode(NeutralMode.Brake);
-  	tal.setSensorPhase(false);
-		tal.setInverted(false);
-    tal.setSelectedSensorPosition(0, 0, 30);   
-    // tal.configForwardLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled);
-    // tal.configReverseLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled);
+    tal.setSensorPhase(false);
+    tal.setInverted(false);
+    tal.setSelectedSensorPosition(0, 0, 30);
+    // tal.configForwardLimitSwitchSource(LimitSwitchSource.Deactivated,
+    // LimitSwitchNormal.Disabled);
+    // tal.configReverseLimitSwitchSource(LimitSwitchSource.Deactivated,
+    // LimitSwitchNormal.Disabled);
 
   }
 
   public void down() {
-    if(tal.getSensorCollection().isFwdLimitSwitchClosed()) {
+    if (tal.getSensorCollection().isFwdLimitSwitchClosed()) {
       tal.set(ControlMode.PercentOutput, -0.75);
     }
   }
 
   public void up() {
-    if(tal.getSensorCollection().isFwdLimitSwitchClosed()) {
+    if (tal.getSensorCollection().isFwdLimitSwitchClosed()) {
       tal.set(ControlMode.PercentOutput, 1);
     }
   }
@@ -56,7 +57,7 @@ public class XRail extends SubsystemBase {
     tal.setSelectedSensorPosition(0, 0, 30);
   }
 
-  public void stop(){
+  public void stop() {
     tal.stopMotor();
   }
 
