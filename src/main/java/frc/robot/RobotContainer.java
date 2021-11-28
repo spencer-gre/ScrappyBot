@@ -26,7 +26,6 @@ import frc.robot.commands.RunWinch;
 import frc.robot.commands.SequentialLower;
 import frc.robot.commands.SequentialRaise;
 import frc.robot.commands.ShootBall;
-import frc.robot.commands.SpinThreeTimes;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.ColorWheelArm;
@@ -102,7 +101,6 @@ public class RobotContainer {
     thumb.whileHeld(new Grab(m_grabber));
     six.whenPressed(new RaiseColorWheelArm(m_colorWheelArm).withTimeout(1));
     nine.whenPressed(new LowerColorWheelArm(m_colorWheelArm).withTimeout(1));
-    seven.whenPressed(new SpinThreeTimes(m_colorwheel));
     eleven.whileHeld(new RaiseXRail(m_xrail));
     sixteen.whileHeld(new LowerXRail(m_xrail));
     // fourteen.whenPressed(new LiftColorWheel(m_colorWheelArm).withTimeout(3));

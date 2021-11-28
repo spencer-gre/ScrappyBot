@@ -56,17 +56,6 @@ public class ColorWheel extends SubsystemBase {
     tal.set(ControlMode.PercentOutput, 0);
   }
 
-  public void spinThreeTimes() {
-    tal.set(ControlMode.MotionMagic, 250);
-  }
-
-  public double getWheelPos() {
-    return tal.getSelectedSensorPosition();
-  }
-  
-  public void resetWheelPos() {
-    tal.setSelectedSensorPosition(0, 0, 10);
-  }
 
   public char getRequired() {
     final String gData = DriverStation.getInstance().getGameSpecificMessage();
