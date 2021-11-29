@@ -27,11 +27,15 @@ public class Arm extends SubsystemBase {
   }
 
   public void liftArm() {
-    spark.set(-0.75);
+    if(getRevLimitSwitch()) {
+      spark.set(-0.75);
+    }
   }
 
   public void lowerArm() {
-    spark.set(0.75);
+    if(getFwdLimitSwitch()) {
+      spark.set(0.75);
+    }
   }
 
   public boolean getFwdLimitSwitch() {

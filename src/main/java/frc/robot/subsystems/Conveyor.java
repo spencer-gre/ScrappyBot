@@ -31,7 +31,7 @@ public class Conveyor extends SubsystemBase {
   }
 
   public void overrideConveyor() {
-    tal.set(0.6);
+    tal.set(0.71);
   }
 
   public int getCount() {

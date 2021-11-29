@@ -15,6 +15,7 @@ import frc.robot.commands.LiftXRailArm;
 import frc.robot.commands.LowerColorWheelArm;
 import frc.robot.commands.LowerXRail;
 import frc.robot.commands.LowerXRailArm;
+import frc.robot.commands.OverrideConveyor;
 import frc.robot.commands.RaiseColorWheelArm;
 import frc.robot.commands.RaiseXRail;
 import frc.robot.commands.RetractGrabber;
@@ -86,6 +87,7 @@ public class RobotContainer {
     final JoystickButton sixteen = new JoystickButton(m_joystick, 16);
     final JoystickButton fourteen = new JoystickButton(m_joystick, 14);
     final JoystickButton thirteen = new JoystickButton(m_joystick, 13);
+    final JoystickButton twelve = new JoystickButton(m_joystick, 12);
 
     trigger.whileHeld(new ShootBall(m_shooter));
     eight.whileHeld(new RunWinch(m_winch));
@@ -98,9 +100,9 @@ public class RobotContainer {
     nine.whenPressed(new LowerColorWheelArm(m_colorWheelArm).withTimeout(1));
     eleven.whileHeld(new RaiseXRail(m_xrail));
     sixteen.whileHeld(new LowerXRail(m_xrail));
-    // fourteen.whenPressed(new LiftColorWheel(m_colorWheelArm).withTimeout(3));
     thirteen.whenPressed(new SequentialRaise(m_colorWheelArm));
     fourteen.whenPressed(new SequentialLower(m_colorWheelArm));
+    twelve.whileHeld(new OverrideConveyor(m_conveyor));
 
     // sixteen.whileHeld(new ManualXRail(m_xrail));
   }

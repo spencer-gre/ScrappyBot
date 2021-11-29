@@ -11,6 +11,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,11 +26,12 @@ public class Drive extends SubsystemBase {
   private WPI_TalonSRX rightSlave;
   private CANCoder leftEncoder;
   private CANCoder rightEncoder;
+  private AHRS navx;
 
   private DifferentialDrive drive;
   private final Field2d m_field = new Field2d();
+  private DifferentialDriveKinematics m_kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(24));
   private DifferentialDriveOdometry m_odometry;
-  private AHRS navx;
 
   /** Creates a new Drive. */
   public Drive() {
