@@ -8,21 +8,32 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Conveyor extends SubsystemBase {
   private WPI_TalonSRX tal;
-  private AnalogInput ultrasound;
-  private Counter counter;
+  // private AnalogInput ultrasound;
+  private DigitalInput topPhotosensor;
+  private DigitalInput positionTwo;
+  private DigitalInput positionThree;
+  private DigitalInput positionFour;
+
+  // private Counter counter;
   /** Creates a new Conveyor. */
   public Conveyor() {
     tal = new WPI_TalonSRX(Constants.SRX_CONVEYOR);
 
-    ultrasound = new AnalogInput(1);
-    counter = new Counter(0);
-    counter.clearDownSource();
+    // ultrasound = new AnalogInput(1);
+    topPhotosensor = new DigitalInput(3);
+    positionTwo = new DigitalInput(2);
+    positionThree = new DigitalInput(1);
+    positionFour = new DigitalInput(0);
+
+    // counter = new Counter(0);
+    // counter.clearDownSource();
 
     tal.configFactoryDefault();
     tal.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
@@ -34,17 +45,33 @@ public class Conveyor extends SubsystemBase {
     tal.set(0.71);
   }
 
-  public int getCount() {
-    return counter.get();
+  // public int getCount() {
+  //   return counter.get();
+  // }
+
+  public boolean getTop() {
+    return topPhotosensor.get();
+  }
+
+  public boolean getTwo() {
+    return positionTwo.get();
+  }
+
+  public boolean getThree() {
+    return positionThree.get();
+  }
+
+  public boolean getBottom() {
+    return positionFour.get();
   }
 
   public double getEncoder() {
     return tal.getSelectedSensorPosition();
   }
 
-  public int getUltrasound() {
-    return ultrasound.getValue();
-  }
+  // public int getUltrasound() {
+  //   return ultrasound.getValue();
+  // }
 
   public void stop() {
     tal.stopMotor();
@@ -57,7 +84,6 @@ public class Conveyor extends SubsystemBase {
     //   incCount();
     // }
     SmartDashboard.putNumber("ConveyorEncoder", getEncoder());
-    SmartDashboard.putNumber("Count", getCount());
-    SmartDashboard.putNumber("Ultrasound", getUltrasound());
+    SmartDashboard.putBoolean("Count", getBottom());
   }
 }

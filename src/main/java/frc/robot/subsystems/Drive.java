@@ -30,7 +30,8 @@ public class Drive extends SubsystemBase {
 
   private DifferentialDrive drive;
   private final Field2d m_field = new Field2d();
-  private DifferentialDriveKinematics m_kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(24));
+  private DifferentialDriveKinematics m_kinematics =
+      new DifferentialDriveKinematics(Units.inchesToMeters(24));
   private DifferentialDriveOdometry m_odometry;
 
   /** Creates a new Drive. */
