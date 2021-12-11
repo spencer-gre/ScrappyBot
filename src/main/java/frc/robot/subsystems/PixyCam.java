@@ -13,7 +13,7 @@ public class PixyCam extends SubsystemBase {
   private Pixy2 pixy;
   public PixyCam() {
     pixy = Pixy2.createInstance(Pixy2.LinkType.SPI);
-    pixy.init();
+    pixy.init(1);
   }
 
   public void turnOn() {

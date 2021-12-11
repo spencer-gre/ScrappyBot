@@ -20,6 +20,7 @@ public class Conveyor extends SubsystemBase {
   private DigitalInput positionTwo;
   private DigitalInput positionThree;
   private DigitalInput positionFour;
+  private DigitalInput positionFive;
 
   // private Counter counter;
   /** Creates a new Conveyor. */
@@ -31,6 +32,7 @@ public class Conveyor extends SubsystemBase {
     positionTwo = new DigitalInput(2);
     positionThree = new DigitalInput(1);
     positionFour = new DigitalInput(0);
+    positionFive = new DigitalInput(5);
 
     // counter = new Counter(0);
     // counter.clearDownSource();
@@ -61,8 +63,12 @@ public class Conveyor extends SubsystemBase {
     return positionThree.get();
   }
 
-  public boolean getBottom() {
+  public boolean getFour() {
     return positionFour.get();
+  }
+
+  public boolean getBottom() {
+    return positionFive.get();
   }
 
   public double getEncoder() {

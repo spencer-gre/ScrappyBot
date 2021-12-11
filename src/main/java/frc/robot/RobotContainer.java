@@ -17,6 +17,7 @@ import frc.robot.commands.LowerXRail;
 import frc.robot.commands.LowerXRailArm;
 import frc.robot.commands.OverrideConveyor;
 import frc.robot.commands.RaiseXRail;
+import frc.robot.commands.RetractGrabber;
 import frc.robot.commands.SequentialLower;
 import frc.robot.commands.SequentialRaise;
 import frc.robot.commands.ShootBall;
@@ -85,6 +86,8 @@ public class RobotContainer {
     eleven.whileHeld(new RaiseXRail(m_xrail));
     final JoystickButton sixteen = new JoystickButton(m_right, 16);
     sixteen.whileHeld(new LowerXRail(m_xrail));
+    final JoystickButton two = new JoystickButton(m_right, 2);
+    two.whileHeld(new TogglePixyLight(m_pixy));
 
     // * Assistant Bindings
     final JoystickButton l_trigger = new JoystickButton(m_left, 1);
@@ -100,7 +103,7 @@ public class RobotContainer {
     final JoystickButton l_five = new JoystickButton(m_left, 5);
     l_five.whenPressed(new ExtendGrabber(m_grabber).withTimeout(2));
     final JoystickButton l_ten = new JoystickButton(m_left, 10);
-    l_ten.whenPressed(new ExtendGrabber(m_grabber).withTimeout(2));
+    l_ten.whenPressed(new RetractGrabber(m_grabber).withTimeout(2));
     final JoystickButton l_three = new JoystickButton(m_left, 3);
     l_three.whenPressed(new CycleConveyor(m_conveyor));
 

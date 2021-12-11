@@ -10,8 +10,8 @@ import com.ctre.phoenix.sensors.CANCoder;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,9 +30,8 @@ public class Drive extends SubsystemBase {
 
   private DifferentialDrive drive;
   private final Field2d m_field = new Field2d();
-  private DifferentialDriveKinematics m_kinematics =
-      new DifferentialDriveKinematics(Units.inchesToMeters(24));
   private DifferentialDriveOdometry m_odometry;
+  Pose2d m_pose = new Pose2d(0, 0, new Rotation2d());
 
   /** Creates a new Drive. */
   public Drive() {
@@ -50,7 +49,7 @@ public class Drive extends SubsystemBase {
     leftSlave.follow(leftMaster);
 
     navx = new AHRS(SPI.Port.kMXP);
-    m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(navx.getAngle()));
+    m_odometry = new DifferentialDriveOdometry(new Rotation2d(), new Pose2d(0, 0, new Rotation2d()));
 
     SmartDashboard.putData("Field", m_field);
   }
@@ -59,17 +58,9 @@ public class Drive extends SubsystemBase {
     drive.arcadeDrive(y, x);
   }
 
-  public void updateOdometry() {
-    m_odometry.update(
-        Rotation2d.fromDegrees(navx.getAngle()),
-        nativeUnitsToDistanceMeters(leftEncoder.getPosition()),
-        nativeUnitsToDistanceMeters(rightEncoder.getPosition()));
-  }
-
   private double nativeUnitsToDistanceMeters(double sensorCounts) {
-    double motorRotations = (double) sensorCounts / 4096;
-    double wheelRotations = motorRotations / 10.71;
-    double positionMeters = wheelRotations * (2 * Math.PI * Units.inchesToMeters(3));
+    double motorRotations = (double) sensorCounts / 360;
+    double positionMeters = motorRotations * (Math.PI * Units.inchesToMeters(6));
     return positionMeters;
   }
 
@@ -77,9 +68,13 @@ public class Drive extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // Rotation2d gyroAngle = Rotation2d.fromDegrees(-navx.getAngle());
-    updateOdometry();
+    // updateOdometry();
+    SmartDashboard.putNumber("Yaw", navx.getYaw());
+    Rotation2d gyroAngle = Rotation2d.fromDegrees(-navx.getYaw());
+    m_pose = m_odometry.update(gyroAngle, nativeUnitsToDistanceMeters(leftEncoder.getPosition()), nativeUnitsToDistanceMeters(rightEncoder.getPosition()));
     m_field.setRobotPose(m_odometry.getPoseMeters());
     SmartDashboard.putNumber("OdometryX", m_odometry.getPoseMeters().getX());
     SmartDashboard.putNumber("OdometryY", m_odometry.getPoseMeters().getY());
+    SmartDashboard.putNumber("CanCoderLeft", leftEncoder.getPosition());
   }
 }

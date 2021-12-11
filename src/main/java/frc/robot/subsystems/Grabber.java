@@ -20,11 +20,11 @@ public class Grabber extends SubsystemBase {
   }
 
   public void extendGrabber() {
-    solenoid.set(Value.kReverse);
-  }
-
-  public void retractGrabber() {
     solenoid.set(Value.kForward);
+  }
+  
+  public void retractGrabber() {
+    solenoid.set(Value.kReverse);
   }
 
   public void offGrabber() {
