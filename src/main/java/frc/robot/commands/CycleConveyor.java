@@ -36,7 +36,7 @@ public class CycleConveyor extends CommandBase {
   @Override
   public boolean isFinished() {
     // No Balls
-    if(m_conveyor.getBottom()) {
+    if(m_conveyor.getOne()) {
       return true;
     }
     return false;

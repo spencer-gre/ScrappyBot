@@ -42,6 +42,7 @@ public class Drive extends SubsystemBase {
     leftEncoder = new CANCoder(10);
     rightEncoder = new CANCoder(11);
     leftEncoder.setPosition(0);
+    leftEncoder.configSensorDirection(true);
     rightEncoder.setPosition(0);
 
     drive = new DifferentialDrive(leftMaster, rightMaster);
@@ -76,5 +77,6 @@ public class Drive extends SubsystemBase {
     SmartDashboard.putNumber("OdometryX", m_odometry.getPoseMeters().getX());
     SmartDashboard.putNumber("OdometryY", m_odometry.getPoseMeters().getY());
     SmartDashboard.putNumber("CanCoderLeft", leftEncoder.getPosition());
+    SmartDashboard.putNumber("CanCOderRight", rightEncoder.getPosition());
   }
 }

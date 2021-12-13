@@ -17,25 +17,23 @@ public class Conveyor extends SubsystemBase {
   private WPI_TalonSRX tal;
   // private AnalogInput ultrasound;
   private DigitalInput topPhotosensor;
-  private DigitalInput positionTwo;
   private DigitalInput positionThree;
-  private DigitalInput positionFour;
-  private DigitalInput positionFive;
+  private DigitalInput positionTwo;
+  private DigitalInput positionOne;
 
-  // private Counter counter;
+  private Counter counter;
   /** Creates a new Conveyor. */
   public Conveyor() {
     tal = new WPI_TalonSRX(Constants.SRX_CONVEYOR);
 
     // ultrasound = new AnalogInput(1);
-    topPhotosensor = new DigitalInput(3);
+    topPhotosensor = new DigitalInput(4);
+    positionThree = new DigitalInput(3);
     positionTwo = new DigitalInput(2);
-    positionThree = new DigitalInput(1);
-    positionFour = new DigitalInput(0);
-    positionFive = new DigitalInput(5);
+    positionOne = new DigitalInput(1);
 
-    // counter = new Counter(0);
-    // counter.clearDownSource();
+    counter = new Counter(0);
+    counter.clearDownSource();
 
     tal.configFactoryDefault();
     tal.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
@@ -54,21 +52,16 @@ public class Conveyor extends SubsystemBase {
   public boolean getTop() {
     return topPhotosensor.get();
   }
-
+  
+  public boolean getThree() {
+    return positionThree.get();
+  }
   public boolean getTwo() {
     return positionTwo.get();
   }
 
-  public boolean getThree() {
-    return positionThree.get();
-  }
-
-  public boolean getFour() {
-    return positionFour.get();
-  }
-
-  public boolean getBottom() {
-    return positionFive.get();
+  public boolean getOne() {
+    return positionOne.get();
   }
 
   public double getEncoder() {
@@ -90,6 +83,6 @@ public class Conveyor extends SubsystemBase {
     //   incCount();
     // }
     SmartDashboard.putNumber("ConveyorEncoder", getEncoder());
-    SmartDashboard.putBoolean("Count", getBottom());
+    SmartDashboard.putBoolean("Count", getOne());
   }
 }

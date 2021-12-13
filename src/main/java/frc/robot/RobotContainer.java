@@ -13,6 +13,7 @@ import frc.robot.commands.CycleConveyor;
 import frc.robot.commands.ExtendGrabber;
 import frc.robot.commands.Grab;
 import frc.robot.commands.LiftXRailArm;
+import frc.robot.commands.LimelightAlign;
 import frc.robot.commands.LowerXRail;
 import frc.robot.commands.LowerXRailArm;
 import frc.robot.commands.OverrideConveyor;
@@ -28,6 +29,7 @@ import frc.robot.subsystems.ColorWheelArm;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Grabber;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.PixyCam;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Winch;
@@ -52,6 +54,7 @@ public class RobotContainer {
   private final Arm m_arm = new Arm();
   private final ColorWheelArm m_colorWheelArm = new ColorWheelArm();
   private final PixyCam m_pixy = new PixyCam();
+  private final Limelight m_lime = new Limelight();
 
   private final Joystick m_left = new Joystick(0);
   private final Joystick m_right = new Joystick(1);
@@ -88,6 +91,8 @@ public class RobotContainer {
     sixteen.whileHeld(new LowerXRail(m_xrail));
     final JoystickButton two = new JoystickButton(m_right, 2);
     two.whileHeld(new TogglePixyLight(m_pixy));
+    final JoystickButton five = new JoystickButton(m_right, 5);
+    five.whileHeld(new LimelightAlign(m_lime, m_drive));
 
     // * Assistant Bindings
     final JoystickButton l_trigger = new JoystickButton(m_left, 1);
