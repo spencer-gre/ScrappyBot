@@ -19,6 +19,7 @@ import frc.robot.commands.LowerXRailArm;
 import frc.robot.commands.OverrideConveyor;
 import frc.robot.commands.RaiseXRail;
 import frc.robot.commands.RetractGrabber;
+import frc.robot.commands.RunWinch;
 import frc.robot.commands.SequentialLower;
 import frc.robot.commands.SequentialRaise;
 import frc.robot.commands.ShootBall;
@@ -111,6 +112,10 @@ public class RobotContainer {
     l_ten.whenPressed(new RetractGrabber(m_grabber).withTimeout(2));
     final JoystickButton l_three = new JoystickButton(m_left, 3);
     l_three.whenPressed(new CycleConveyor(m_conveyor));
+    final JoystickButton l_six = new JoystickButton(m_left, 6);
+    l_six.whileHeld(new RunWinch(m_winch));
+    final JoystickButton l_nine = new JoystickButton(m_left, 9);
+    l_nine.whileHeld(new RunWinch(m_winch));
 
 
     // final JoystickButton eight = new JoystickButton(m_left, 8);

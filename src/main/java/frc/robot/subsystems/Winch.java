@@ -20,7 +20,7 @@ public class Winch extends SubsystemBase {
   }
 
   public void start() {
-    winchMaster.set(0.1);
+    winchMaster.set(1.0);
   }
 
   public void stop() {
